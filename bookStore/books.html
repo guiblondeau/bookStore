@@ -39,10 +39,10 @@
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
-                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow</a>
+                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Return</a>
                 </td>
                 <td ng-hide = "isBorrowed(book)">
-                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Return</a>
+                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow</a>
                 </td>
             </tr>
         </table>

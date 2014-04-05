@@ -8,6 +8,7 @@ bookStoreApp.controller('booksController',
 
             $scope.bookDetail = function(book) {
                 $scope.book = book;
+                $scope.users = usersService.getUsers(successGetUsers, failureGet);
                 $scope.borrow = true;
             }
 
@@ -51,17 +52,12 @@ bookStoreApp.controller('booksController',
                 bookService.getBooks(successGet, failureGet);
             }
 
-            var successGet = function(data) {
+            var successGetUsers = function(data) {
                 console.log("good");
                 console.log(data.list);
                 $scope.users =  data.list;
             }
 
-            var failureGet = function(data) {
-                console.log("error")
-            }
-
-            $scope.users = usersService.getUsers(successGet, failureGet);
 
             $scope.isBorrowed = function(book) {
                 return (book.borrower != undefined) && (book.borrower != null);
