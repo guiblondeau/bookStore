@@ -6,8 +6,8 @@ bookStoreApp.controller('booksController',
 
         var successGet = function(data) {
             console.log("good");
-            console.log(data(0));
-            $scope.books = data(0);
+            console.log(data[0]);
+            $scope.books = data[0];
         }
 
         var failureGet = function(data) {
