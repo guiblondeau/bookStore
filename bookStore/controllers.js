@@ -5,6 +5,8 @@ bookStoreApp.controller('booksController',
         var isBooked = $routeParams.isBooked;
 
         var successGet = function(data) {
+            console.log("good");
+            console.log("data");
             $scope.books = data;
         }
 
