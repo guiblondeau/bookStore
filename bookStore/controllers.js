@@ -16,11 +16,11 @@ bookStoreApp.controller('booksController',
 
         if (isBooked != undefined) {
             if (isBooked == "true") {
-                bookService.getBooks(successGet, failureGet).filter(function(book){
-                    return (book.borrower != undefined) && (book.borrower != null)
+                bookService.getBooks(successGet, failureGet).list.filter(function(book){
+                    return (borrower != undefined) && (book.borrower != null)
                 });
             } else if (isBooked == "false") {
-                bookService.getBooks(successGet, failureGet).filter(function(book){
+                bookService.getBooks(successGet, failureGet).list.filter(function(book){
                     return (book.borrower == undefined) || (book.borrower == null)
                 });
             } else {
