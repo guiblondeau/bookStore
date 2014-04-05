@@ -8,6 +8,14 @@ booksService.factory('booksService', ['$http', function($http){
         return $http.get('https://bookrent.apispark.net/v1/books/?strategy=load').success(success, failure);
     };
 
+    service.saveBook = function(book, success, failure) {
+        if (book.id) {
+
+        } else {
+            $http.put('https://bookrent.apispark.net/v1/books/'+book.id, book).success(success, failure);
+        }
+    }
+
     return service;
 
 }]);

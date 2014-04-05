@@ -5,22 +5,15 @@
     <div ng-show = "borrow" class = "well">
         <form role = "form">
             <div class="form-group">
-                <label for="name">Book name</label>
-                <input class="form-control" id="name" value = "{{book.name}}">
+                <label>Book name</label>
+                <p class="form-control-static">{{book.name}}</p>
             </div>
             <div class="form-group">
                 <label>Borrower</label>
-                <select class = "form-control">
-                    <option ng-repeat = "user in users" id = "{{user.id}}">
-                        hey {{user.name}}
-                    </option>
+                <select class = "form-control" ng-model="user" ng-options="user.name for user in users">
                 </select>
-                <ul>
-                    <li ng-repeat = "user in users" id = "{{user.id}}">
-                        hey {{user.name}}
-                    </li>
-                </ul>
             </div>
+            <a class="btn btn-default" ng-click = "save()"></a>
         </form>
     </div>
 
@@ -44,10 +37,10 @@
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
-                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Return</a>
+                    <a class = "btn btn-default" ng-click = "bookReturn(book)">Return</a>
                 </td>
                 <td ng-hide = "isBorrowed(book)">
-                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow</a>
+                    <a class = "btn btn-default" ng-click = "bookBorrow(book)">Borrow</a>
                 </td>
             </tr>
         </table>
