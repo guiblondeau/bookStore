@@ -2,15 +2,20 @@
 
     <h2 align = "center">Books</h2>
 
-    <div ng-show = "selected">
+    <div ng-show = "selected" class = "well">
         <form role = "form">
             <div class="form-group">
                 <label for="name">Book name</label>
                 <input class="form-control" id="name" value = "{{book.name}}">
             </div>
-            <select class = "form-control" ng-repeat = "user in users">
-                <options>{{user.name}}</options>
-            </select>
+            <div class="form-group">
+                <label for="users">Borrower</label>
+                <select class = "form-control" id = "users">
+                    <options ng-repeat = "user in users">
+                        {{user.name}}
+                    </options>
+                </select>
+            </div>
         </form>
     </div>
 
