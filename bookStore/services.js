@@ -4,7 +4,7 @@ booksService.factory('booksService', ['$http', function($http){
 
     var service = {};
 
-    service.getBooks = function() {
+    service.getBooks = function(success, failure) {
         return $http.get('https://bookrent.apispark.net/v1/books/').success(success, failure);
     };
 

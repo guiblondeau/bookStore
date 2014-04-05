@@ -4,20 +4,28 @@ bookStoreApp.controller('booksController',
 
         var isBooked = $routeParams.isBooked;
 
+        var successGet = function(data) {
+            $scope.books = data;
+        }
+
+        var failureGet = function(data) {
+            console.log("error")
+        }
+
         if (isBooked != undefined) {
             if (isBooked == "true") {
-                $scope.books = bookService.getBooks().filter(function(book){
+                bookService.getBooks(successGet, failureGet).filter(function(book){
                     return (book.borrower != undefined) && (book.borrower != null)
                 });
             } else if (isBooked == "false") {
-                $scope.books = bookService.getBooks().filter(function(book){
+                bookService.getBooks(successGet, failureGet).filter(function(book){
                     return (book.borrower == undefined) || (book.borrower == null)
                 });
             } else {
-                $scope.books = bookService.getBooks();
+                bookService.getBooks(successGet, failureGet);
             }
         } else {
-            $scope.books = bookService.getBooks();
+            bookService.getBooks(successGet, failureGet);
         }
 }]);
 
