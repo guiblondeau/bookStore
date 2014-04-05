@@ -8,19 +8,14 @@ bookStoreApp.controller('booksController',
 
             $scope.bookDetail = function(book) {
                 $scope.book = book;
-                $scope.users = usersService.getUsers(successGetUsers, failureGet);
                 $scope.borrow = true;
             }
 
             var successGet = function(data) {
-                console.log("good");
-                console.log(data.list);
                 $scope.books =  data.list;
             }
 
             var successGetBorrowed = function(data) {
-                console.log("good");
-                console.log(data.list);
                 $scope.books =  data.list.filter(function(book){
                     console.log(book);
                     return (book.borrower != undefined) && (book.borrower != null)
@@ -28,8 +23,6 @@ bookStoreApp.controller('booksController',
             }
 
             var successGetFree = function(data) {
-                console.log("good");
-                console.log(data.list);
                 $scope.books =  data.list.filter(function(book){
                     console.log(book);
                     return (book.borrower == undefined) || (book.borrower == null)
@@ -53,11 +46,11 @@ bookStoreApp.controller('booksController',
             }
 
             var successGetUsers = function(data) {
-                console.log("good");
-                console.log(data.list);
+                console.log(data);
                 $scope.users =  data.list;
             }
 
+            usersService.getUsers(successGetUsers, failureGet);
 
             $scope.isBorrowed = function(book) {
                 return (book.borrower != undefined) && (book.borrower != null);
