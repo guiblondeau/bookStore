@@ -9,10 +9,10 @@ booksService.factory('booksService', ['$http', function($http){
     };
 
     service.saveBook = function(book, success, failure) {
-        if (book.id) {
-
-        } else {
+        if (book.id != null) {
             $http.put('https://bookrent.apispark.net/v1/books/'+book.id, book).success(success, failure);
+        } else {
+
         }
     }
 

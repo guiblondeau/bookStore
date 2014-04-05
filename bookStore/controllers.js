@@ -76,6 +76,7 @@ bookStoreApp.controller('booksController',
                     console.log("fail");
                 }
                 bookService.saveBook(toSave, success, failure);
+                $scope.borrow = false;
             }
 }]);
 
