@@ -56,6 +56,9 @@ bookStoreApp.controller('booksController',
                 $scope.borrow = true;
             }
 
+            /*
+            Save a book
+             */
             $scope.save = function() {
                 var toSave = {
                     id : $scope.book.id,
@@ -74,6 +77,9 @@ bookStoreApp.controller('booksController',
                 $scope.borrow = false;
             }
 
+            /*
+            Used to return a book
+             */
             $scope.bookReturn = function(book) {
                 $scope.book = book;
                 var toSave = {
