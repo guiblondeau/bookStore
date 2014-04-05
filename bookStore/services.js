@@ -1,11 +1,11 @@
 var booksService = angular.module('bookStore.services', []);
 
-booksService.factory('booksService', function(){
+booksService.factory('booksService', ['$http', function($http){
 
     var service = {};
 
     service.getBooks = function() {
-        return books;
+        return $http.get('https://bookrent.apispark.net/v1/books/').success(success, failure);
     };
 
     var books = [
@@ -21,7 +21,7 @@ booksService.factory('booksService', function(){
         }];
     return service;
 
-});
+}]);
 
 booksService.factory('usersService', function(){
 
