@@ -6,7 +6,7 @@ bookStoreApp.controller('booksController',
 
         var successGet = function(data) {
             console.log("good");
-            console.log("data");
+            console.log(data);
             $scope.books = data;
         }
 
