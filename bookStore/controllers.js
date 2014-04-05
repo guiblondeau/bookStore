@@ -52,7 +52,7 @@ bookStoreApp.controller('usersController',
             var successGet = function(data) {
                 console.log("good");
                 console.log(data.list);
-                $scope.books =  data.list;
+                $scope.users =  data.list;
             }
 
             var failureGet = function(data) {
