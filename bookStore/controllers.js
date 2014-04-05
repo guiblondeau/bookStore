@@ -7,7 +7,7 @@ bookStoreApp.controller('booksController',
         var successGet = function(data) {
             console.log("good");
             console.log(data.list);
-            $scope.books = data.list;
+            return data.list;
         }
 
         var failureGet = function(data) {
@@ -16,18 +16,18 @@ bookStoreApp.controller('booksController',
 
         if (isBooked != undefined) {
             if (isBooked == "true") {
-                bookService.getBooks(successGet, failureGet).list.filter(function(book){
+                $scope.books = bookService.getBooks(successGet, failureGet).filter(function(book){
                     return (borrower != undefined) && (book.borrower != null)
                 });
             } else if (isBooked == "false") {
-                bookService.getBooks(successGet, failureGet).list.filter(function(book){
+                $scope.books = bookService.getBooks(successGet, failureGet).filter(function(book){
                     return (book.borrower == undefined) || (book.borrower == null)
                 });
             } else {
-                bookService.getBooks(successGet, failureGet);
+                $scope.books = bookService.getBooks(successGet, failureGet);
             }
         } else {
-            bookService.getBooks(successGet, failureGet);
+            $scope.books = bookService.getBooks(successGet, failureGet);
         }
 }]);
 
