@@ -57,9 +57,9 @@ bookStoreApp.controller('booksController',
             }
 
             /*
-            Save a book
+            Update a book
              */
-            $scope.save = function() {
+            $scope.update = function() {
                 var toSave = {
                     id : $scope.book.id,
                     name : $scope.book.name,
@@ -74,6 +74,25 @@ bookStoreApp.controller('booksController',
                     console.log("fail");
                 }
                 bookService.saveBook(toSave, success, failure);
+                $scope.borrow = false;
+            }
+
+            /*
+             Save a book
+             */
+            $scope.update = function() {
+                var toSave = {
+                    name : $scope.book.name
+                }
+                console.log(toSave);
+                var success = function(data) {
+                    $scope.borrow = false;
+                    $location.path('#/books/');
+                }
+                var failure = function (data) {
+                    console.log("fail");
+                }
+                bookService.updateBook(toSave, success, failure);
                 $scope.borrow = false;
             }
 

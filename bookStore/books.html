@@ -1,4 +1,4 @@
-<div class = "container">
+<div class = "container-fluid">
 
     <h2 align = "center">Books</h2>
 
@@ -14,14 +14,35 @@
                 </select>
             </div>
             <a class="btn btn-info" ng-click = "borrow = false">Cancel</a>
+            <a class="btn btn-default" ng-click = "update()">Borrow</a>
+        </form>
+    </div>
+
+    <div ng-show = "create" class = "well">
+        <form role = "form">
+            <div class = "form-group">
+                <label>Book name</label>
+                <input class = "form-control" placeholder = "Book name">
+            </div>
+            <a class="btn btn-info" ng-click = "create = false">Cancel</a>
             <a class="btn btn-default" ng-click = "save()">Borrow</a>
         </form>
     </div>
 
-    <div align = "center" class="btn-group">
-        <a type="button" href = "#/books/true" class="btn btn-default">Borrowed books</a>
-        <a type="button" href = "#/books/" class="btn btn-default">All books</a>
-        <a type="button" href = "#/books/false" class="btn btn-default">Available books</a>
+    <div class = "row">
+        <div class = "col-md-6 col-lg-6">
+            <div align = "center" class="btn-group">
+                <a type="button" href = "#/books/true" class="btn btn-default">Borrowed books</a>
+                <a type="button" href = "#/books/" class="btn btn-default">All books</a>
+                <a type="button" href = "#/books/false" class="btn btn-default">Available books</a>
+            </div>
+        </div>
+
+        <div class = "col-md-6 col-lg-6">
+            <div aling = "right">
+                <a class="btn btn-default" ng-click = "create = true">Add book</a>
+            </div>
+        </div>
     </div>
 
     <br/>
