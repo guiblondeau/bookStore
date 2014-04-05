@@ -82,7 +82,7 @@ bookStoreApp.controller('booksController',
              */
             $scope.save = function() {
                 var toSave = {
-                    name : $scope.book.name
+                    name : $scope.bookName
                 }
                 console.log(toSave);
                 var success = function(data) {
