@@ -73,14 +73,14 @@ bookStoreApp.controller('booksController',
                 var failure = function (data) {
                     console.log("fail");
                 }
-                bookService.saveBook(toSave, success, failure);
+                bookService.updateBook(toSave, success, failure);
                 $scope.borrow = false;
             }
 
             /*
              Save a book
              */
-            $scope.update = function() {
+            $scope.save = function() {
                 var toSave = {
                     name : $scope.book.name
                 }
@@ -92,7 +92,7 @@ bookStoreApp.controller('booksController',
                 var failure = function (data) {
                     console.log("fail");
                 }
-                bookService.updateBook(toSave, success, failure);
+                bookService.saveBook(toSave, success, failure);
                 $scope.borrow = false;
             }
 
