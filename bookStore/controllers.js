@@ -66,7 +66,7 @@ bookStoreApp.controller('booksController',
                 var toSave = {
                     name : $scope.book.name,
                     id : $scope.book.id,
-                    user : $scope.user
+                    user : $scope.user.id
                 }
                 console.log(toSave);
                 var success = function(data) {
@@ -75,7 +75,7 @@ bookStoreApp.controller('booksController',
                 var failure = function (data) {
                     console.log("fail");
                 }
-                //bookService.saveBook(toSave, success, failure);
+                bookService.saveBook(toSave, success, failure);
             }
 }]);
 
