@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="use">Borrower</label>
                 <select class = "form-control" id = "use">
-                    <options ng-repeat = "user in users">
+                    <options ng-repeat = "user in users" id = "{{user.id}}">
                         {{user.name}}
                     </options>
                 </select>
