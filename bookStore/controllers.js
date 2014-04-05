@@ -2,39 +2,47 @@ bookStoreApp.controller('booksController',
     ['$scope', 'booksService', '$location', '$routeParams',
         function($scope, bookService, $location, $routeParams){
 
-        var isBooked = $routeParams.isBooked;
+            var isBooked = $routeParams.isBooked;
 
-        var successGet = function(data) {
-            console.log("good");
-            console.log(data.list);
-            $scope.books =  data.list;
-        }
+            var successGet = function(data) {
+                console.log("good");
+                console.log(data.list);
+                $scope.books =  data.list;
+            }
 
-        var failureGet = function(data) {
-            console.log("error")
-        }
-
-        console.log(bookService.getBooks(successGet, failureGet));
-
-        if (isBooked != undefined) {
-            if (isBooked == "true") {
-                bookService.getBooks(successGet, failureGet);
-                $scope.books = $scope.books.filter(function(book){
+            var successGetBorrowed = function(data) {
+                console.log("good");
+                console.log(data.list);
+                $scope.books =  data.list.filter(function(book){
                     console.log(book);
                     return (book.borrower != undefined) && (book.borrower != null)
                 });
-            } else if (isBooked == "false") {
-                bookService.getBooks(successGet, failureGet);
-                $scope.books = $scope.books.filter(function(book){
+            }
+
+            var successGetUnborrowed = function(data) {
+                console.log("good");
+                console.log(data.list);
+                $scope.books =  data.list.filter(function(book){
                     console.log(book);
                     return (book.borrower == undefined) || (book.borrower == null)
                 });
+            }
+
+            var failureGet = function(data) {
+                console.log("error")
+            }
+
+            if (isBooked != undefined) {
+                if (isBooked == "true") {
+                    bookService.getBooks(successGetBorrowed, failureGet);
+                } else if (isBooked == "false") {
+                    bookService.getBooks(successGetUnborrowed, failureGet);
+                } else {
+                    bookService.getBooks(successGet, failureGet);
+                }
             } else {
                 bookService.getBooks(successGet, failureGet);
             }
-        } else {
-            bookService.getBooks(successGet, failureGet);
-        }
 }]);
 
 bookStoreApp.controller('usersController',
