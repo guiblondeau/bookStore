@@ -7,14 +7,14 @@ bookStoreApp.controller('booksController',
         var successGet = function(data) {
             console.log("good");
             console.log(data.list);
-            console.log(data[0]);
-            console.log(data);
             return data.list;
         }
 
         var failureGet = function(data) {
             console.log("error")
         }
+
+        console.log(bookService.getBooks(successGet, failureGet));
 
         if (isBooked != undefined) {
             if (isBooked == "true") {
