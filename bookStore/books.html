@@ -22,7 +22,7 @@
         <form role = "form">
             <div class = "form-group">
                 <label>Book name</label>
-                <input class = "form-control" placeholder = "Book name">
+                <input class = "form-control" ng-model = "user.name" placeholder = "Book name">
             </div>
             <a class="btn btn-info" ng-click = "create = false">Cancel</a>
             <a class="btn btn-default" ng-click = "save()">Create</a>
