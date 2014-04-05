@@ -81,6 +81,7 @@ bookStoreApp.controller('booksController',
                     name : $scope.book.name,
                     borrower : null
                 }
+                console.log(toSave);
                 var success = function(data) {
                 }
                 var failure = function (data) {
