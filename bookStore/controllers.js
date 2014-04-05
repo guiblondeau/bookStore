@@ -64,9 +64,9 @@ bookStoreApp.controller('booksController',
 
             $scope.save = function() {
                 var toSave = {
-                    name : $scope.book.name,
                     id : $scope.book.id,
-                    user : $scope.user.id
+                    name : $scope.book.name,
+                    borrower : $scope.user
                 }
                 console.log(toSave);
                 var success = function(data) {
