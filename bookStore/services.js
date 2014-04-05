@@ -8,39 +8,17 @@ booksService.factory('booksService', ['$http', function($http){
         return $http.get('https://bookrent.apispark.net/v1/books/?strategy=load').success(success, failure);
     };
 
-    var books = [
-        {
-            name : "Effective Java",
-            borrower : {
-                id : 1,
-                name : 'Guillaume Blondeau'
-            }
-        },
-        {
-            name : "Restlet in Action"
-        }];
     return service;
 
 }]);
 
-booksService.factory('usersService', function(){
+booksService.factory('usersService', ['$http', function($http){
 
     var service = {};
 
-    service.getUsers = function() {
-        return users;
+    service.getUsers = function(success, failure) {
+        return $http.get('https://bookrent.apispark.net/v1/users/').success(success, failure);
     }
 
-    var users = [
-        {
-            "id" : 1,
-            "name" : "Guillaume Blondeau"
-        },
-        {
-            "id" : 2,
-            "name" : "Cyprien Quilici"
-        }
-    ];
-
     return service;
-});
+}]);

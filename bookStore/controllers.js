@@ -49,6 +49,16 @@ bookStoreApp.controller('usersController',
     ['$scope', 'usersService', '$location', '$routeParams',
         function($scope, usersService, $location, $routeParams){
 
-            $scope.users = usersService.getUsers();
+            var successGet = function(data) {
+                console.log("good");
+                console.log(data.list);
+                $scope.books =  data.list;
+            }
+
+            var failureGet = function(data) {
+                console.log("error")
+            }
+
+            $scope.users = usersService.getUsers(successGet, failureGet);
 
 }]);
