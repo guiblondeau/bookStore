@@ -86,7 +86,7 @@ bookStoreApp.controller('booksController',
                 }
                 console.log(toSave);
                 var success = function(data) {
-                    $scope.borrow = false;
+                    $scope.create = false;
                     $location.path('#/books/');
                 }
                 var failure = function (data) {
