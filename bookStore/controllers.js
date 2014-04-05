@@ -4,19 +4,6 @@ bookStoreApp.controller('booksController',
 
             var isBooked = $routeParams.isBooked;
 
-            $scope.borrow = false;
-            $scope.return = false;
-
-            $scope.bookBorrow = function(book) {
-                $scope.book = book;
-                $scope.borrow = true;
-            }
-
-            $scope.bookReturn = function(book) {
-                $scope.book = book;
-                $scope.return = true;
-            }
-
             var successGet = function(data) {
                 $scope.books =  data.list;
             }
@@ -62,6 +49,13 @@ bookStoreApp.controller('booksController',
                 return (book.borrower != undefined) && (book.borrower != null);
             }
 
+            $scope.borrow = false;
+
+            $scope.bookBorrow = function(book) {
+                $scope.book = book;
+                $scope.borrow = true;
+            }
+
             $scope.save = function() {
                 var toSave = {
                     id : $scope.book.id,
@@ -77,6 +71,22 @@ bookStoreApp.controller('booksController',
                 }
                 bookService.saveBook(toSave, success, failure);
                 $scope.borrow = false;
+                $location.path('#/books/');
+            }
+
+            $scope.bookReturn = function(book) {
+                $scope.book = book;
+                var toSave = {
+                    id : $scope.book.id,
+                    name : $scope.book.name,
+                    borrower : null
+                }
+                var success = function(data) {
+                }
+                var failure = function (data) {
+                    console.log("fail");
+                }
+                bookService.saveBook(toSave, success, failure);
             }
 }]);
 
