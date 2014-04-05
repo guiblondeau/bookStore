@@ -12,16 +12,12 @@
                 <label for="use">Borrower</label>
                 <select class = "form-control" id = "use">
                     <options ng-repeat = "user in users" id = "{{user.id}}">
-                        {{user.name}}
+                        hey {{user.name}}
                     </options>
                 </select>
             </div>
         </form>
     </div>
-
-    <ul>
-        <li ng-repeat = "user in users">hey {{user.name}}</li>
-    </ul>
 
     <div align = "center" class="btn-group">
         <a type="button" href = "#/books/true" class="btn btn-default">Borrowed books</a>
