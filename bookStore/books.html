@@ -2,15 +2,15 @@
 
     <h2 align = "center">Books</h2>
 
-    <div ng-show = "selected" class = "well">
+    <div ng-show = "borrow" class = "well">
         <form role = "form">
             <div class="form-group">
                 <label for="name">Book name</label>
                 <input class="form-control" id="name" value = "{{book.name}}">
             </div>
             <div class="form-group">
-                <label for="users">Borrower</label>
-                <select class = "form-control" id = "users">
+                <label for="use">Borrower</label>
+                <select class = "form-control" id = "use">
                     <options ng-repeat = "user in users">
                         {{user.name}}
                     </options>
@@ -38,7 +38,12 @@
             <tr ng-repeat = "book in books">
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
-                <td><a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow / Return</a></td>
+                <td ng-show = "isBorrowed(book)">
+                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow</a>
+                </td>
+                <td ng-hide = "isBorrowed(book)">
+                    <a class = "btn btn-default" ng-click = "bookDetail(book)">Return</a>
+                </td>
             </tr>
         </table>
     </div>

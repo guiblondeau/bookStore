@@ -4,11 +4,11 @@ bookStoreApp.controller('booksController',
 
             var isBooked = $routeParams.isBooked;
 
-            $scope.selected = false;
+            $scope.borrow = false;
 
             $scope.bookDetail = function(book) {
                 $scope.book = book;
-                $scope.selected = true;
+                $scope.borrow = true;
             }
 
             var successGet = function(data) {
@@ -62,6 +62,10 @@ bookStoreApp.controller('booksController',
             }
 
             $scope.users = usersService.getUsers(successGet, failureGet);
+
+            $scope.isBorrowed = function(book) {
+                return (book.borrower != undefined) && (book.borrower != null);
+            }
 }]);
 
 bookStoreApp.controller('usersController',
