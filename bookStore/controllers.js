@@ -65,21 +65,20 @@ bookStoreApp.controller('booksController',
                 console.log(toSave);
                 var success = function(data) {
                     $scope.borrow = false;
+                    $location.path('#/books/');
                 }
                 var failure = function (data) {
                     console.log("fail");
                 }
                 bookService.saveBook(toSave, success, failure);
                 $scope.borrow = false;
-                $location.path('#/books/');
             }
 
             $scope.bookReturn = function(book) {
                 $scope.book = book;
                 var toSave = {
                     id : $scope.book.id,
-                    name : $scope.book.name,
-                    borrower : null
+                    name : $scope.book.name
                 }
                 console.log(toSave);
                 var success = function(data) {
