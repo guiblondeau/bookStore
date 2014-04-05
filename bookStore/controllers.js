@@ -1,8 +1,15 @@
 bookStoreApp.controller('booksController',
-    ['$scope', 'booksService', '$location', '$routeParams',
-        function($scope, bookService, $location, $routeParams){
+    ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
+        function($scope, bookService, usersService, $location, $routeParams){
 
             var isBooked = $routeParams.isBooked;
+
+            $scope.selected = false;
+
+            $scope.bookDetail = function(book) {
+                $scope.book = book;
+                $scope.selected = true;
+            }
 
             var successGet = function(data) {
                 console.log("good");
@@ -19,7 +26,7 @@ bookStoreApp.controller('booksController',
                 });
             }
 
-            var successGetUnborrowed = function(data) {
+            var successGetFree = function(data) {
                 console.log("good");
                 console.log(data.list);
                 $scope.books =  data.list.filter(function(book){
@@ -36,13 +43,25 @@ bookStoreApp.controller('booksController',
                 if (isBooked == "true") {
                     bookService.getBooks(successGetBorrowed, failureGet);
                 } else if (isBooked == "false") {
-                    bookService.getBooks(successGetUnborrowed, failureGet);
+                    bookService.getBooks(successGetFree, failureGet);
                 } else {
                     bookService.getBooks(successGet, failureGet);
                 }
             } else {
                 bookService.getBooks(successGet, failureGet);
             }
+
+            var successGet = function(data) {
+                console.log("good");
+                console.log(data.list);
+                $scope.users =  data.list;
+            }
+
+            var failureGet = function(data) {
+                console.log("error")
+            }
+
+            $scope.users = usersService.getUsers(successGet, failureGet);
 }]);
 
 bookStoreApp.controller('usersController',

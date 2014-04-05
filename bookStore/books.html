@@ -2,10 +2,22 @@
 
     <h2 align = "center">Books</h2>
 
+    <div ng-show = "selected">
+        <form role = "form">
+            <div class="form-group">
+                <label for="name">Book name</label>
+                <input class="form-control" id="name" value = "{{book.name}}">
+            </div>
+            <select class = "form-control" ng-repeat = "user in users">
+                <options>{{user.name}}</options>
+            </select>
+        </form>
+    </div>
+
     <div align = "center" class="btn-group">
         <a type="button" href = "#/books/true" class="btn btn-default">Borrowed books</a>
         <a type="button" href = "#/books/" class="btn btn-default">All books</a>
-        <a type="button" href = "#/books/false" class="btn btn-default">Unborrowed books</a>
+        <a type="button" href = "#/books/false" class="btn btn-default">Available books</a>
     </div>
 
     <br/>
@@ -16,10 +28,12 @@
             <tr>
                 <th style = "text-align : center">Name</th>
                 <th style = "text-align : center">Borrower</th>
+                <th style = "text-align : center">Edit</th>
             </tr>
             <tr ng-repeat = "book in books">
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
+                <td><a class = "btn btn-default" ng-click = "bookDetail(book)">Borrow / Return</a></td>
             </tr>
         </table>
     </div>
