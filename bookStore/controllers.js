@@ -2,40 +2,33 @@ bookStoreApp.controller('booksController',
     ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
         function($scope, bookService, usersService, $location, $routeParams){
 
-            var isBooked = $routeParams.isBooked;
+            var books;
 
             var successGet = function(data) {
-                $scope.books =  data.list;
-            }
-
-            var successGetBorrowed = function(data) {
-                $scope.books =  data.list.filter(function(book){
-                    console.log(book);
-                    return (book.borrower != undefined) && (book.borrower != null)
-                });
-            }
-
-            var successGetFree = function(data) {
-                $scope.books =  data.list.filter(function(book){
-                    console.log(book);
-                    return (book.borrower == undefined) || (book.borrower == null)
-                });
+                books = data.list;
+                $scope.books =  books;
             }
 
             var failureGet = function(data) {
                 console.log("error")
             }
 
-            if (isBooked != undefined) {
-                if (isBooked == "true") {
-                    bookService.getBooks(successGetBorrowed, failureGet);
-                } else if (isBooked == "false") {
-                    bookService.getBooks(successGetFree, failureGet);
-                } else {
-                    bookService.getBooks(successGet, failureGet);
-                }
-            } else {
-                bookService.getBooks(successGet, failureGet);
+            bookService.getBooks(successGet, failureGet);
+
+            $scope.getBorrowed = function() {
+                $scope.books =  books.filter(function(book){
+                    return (book.borrower != undefined) && (book.borrower != null)
+                });
+            }
+
+            $scope.getFree = function() {
+                $scope.books =  books.filter(function(book){
+                    return (book.borrower == undefined) || (book.borrower == null)
+                });
+            }
+
+            $scope.getAll = function() {
+                $scope.books = books;
             }
 
             var successGetUsers = function(data) {
