@@ -25,6 +25,7 @@ bookStoreApp.controller('usersController',
                 };
                 usersService.createUser(toSave, function(data){
                     $scope.users.push(data);
+                    $scope.create = false;
                 }, function(data){
                     console.log("error");
                 });
