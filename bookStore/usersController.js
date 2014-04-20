@@ -6,8 +6,6 @@ bookStoreApp.controller('usersController',
         function($scope, usersService, $location, $routeParams){
 
             var successGet = function(data) {
-                console.log("good");
-                console.log(data.list);
                 $scope.users =  data.list;
             }
 
@@ -26,9 +24,9 @@ bookStoreApp.controller('usersController',
                     name : $scope.userName
                 };
                 usersService.createUser(toSave, function(data){
-                    console.log(data);
+                    $scope.users.push(data);
                 }, function(data){
-                    console.log(data);
+                    console.log("error");
                 });
             }
         }
