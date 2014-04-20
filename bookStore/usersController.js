@@ -21,11 +21,11 @@ bookStoreApp.controller('usersController',
             Create user
              */
 
-            var create = function() {
+            var save = function() {
                 var toSave = {
                     name : $scope.userName
                 };
-                usersService.createUser(function(data){
+                usersService.createUser(toSave, function(data){
                     console.log(data);
                 }, function(data){
                     console.log(data);
