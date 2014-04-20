@@ -21,7 +21,7 @@ bookStoreApp.controller('usersController',
             Create user
              */
 
-            var save = function() {
+            $scope.save = function() {
                 var toSave = {
                     name : $scope.userName
                 };
