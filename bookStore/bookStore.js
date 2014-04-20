@@ -5,9 +5,6 @@ bookStoreApp.config(['$routeProvider', function($routeProvider) {
         .when('/books/', {
             templateUrl : 'books.html',
             controller : 'booksController'
-        }).when('/books/:isBooked', {
-            templateUrl : 'books.html',
-            controller : 'booksController'
         }).when('/users/', {
             templateUrl : 'users.html',
             controller : 'usersController'

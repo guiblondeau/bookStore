@@ -28,5 +28,9 @@ booksService.factory('usersService', ['$http', function($http){
         return $http.get('https://bookrent.apispark.net/v1/users/').success(success, failure);
     }
 
+    service.createUser = function(user, success, failure) {
+        return $http.post('https://bookrent.apispark.net/v1/users/', user).success(success, failure);
+    }
+
     return service;
 }]);

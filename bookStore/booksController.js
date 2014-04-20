@@ -1,6 +1,13 @@
+/**
+ * Created by guillaume on 20/04/14.
+ */
 bookStoreApp.controller('booksController',
     ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
         function($scope, bookService, usersService, $location, $routeParams){
+
+            /*
+             Get books
+             */
 
             var books;
 
@@ -31,12 +38,21 @@ bookStoreApp.controller('booksController',
                 $scope.books = books;
             }
 
+            /*
+             Get users
+             */
+
             var successGetUsers = function(data) {
                 console.log(data);
                 $scope.users =  data.list;
             }
 
             usersService.getUsers(successGetUsers, failureGet);
+
+
+            /*
+             Borrow functions
+             */
 
             $scope.isBorrowed = function(book) {
                 return (book.borrower != undefined) && (book.borrower != null);
@@ -50,7 +66,7 @@ bookStoreApp.controller('booksController',
             }
 
             /*
-            Update a book
+             Update a book
              */
             $scope.update = function() {
                 var toSave = {
@@ -90,7 +106,7 @@ bookStoreApp.controller('booksController',
             }
 
             /*
-            Used to return a book
+             Return a book
              */
             $scope.bookReturn = function(book) {
                 $scope.book = book;
@@ -106,22 +122,4 @@ bookStoreApp.controller('booksController',
                 }
                 bookService.saveBook(toSave, success, failure);
             }
-}]);
-
-bookStoreApp.controller('usersController',
-    ['$scope', 'usersService', '$location', '$routeParams',
-        function($scope, usersService, $location, $routeParams){
-
-            var successGet = function(data) {
-                console.log("good");
-                console.log(data.list);
-                $scope.users =  data.list;
-            }
-
-            var failureGet = function(data) {
-                console.log("error")
-            }
-
-            $scope.users = usersService.getUsers(successGet, failureGet);
-
-}]);
+        }]);
