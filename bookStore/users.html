@@ -26,9 +26,11 @@
             </tr>
             <tr ng-repeat = "user in users">
                 <td>{{user.name}}</td>
-                <a class = "btn btn-link" ng-click = "delete(user)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
+                <td>
+                    <a class = "btn btn-link" ng-click = "delete(user)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
             </tr>
         </table>
     </div>
