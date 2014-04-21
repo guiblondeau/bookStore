@@ -115,7 +115,7 @@ bookStoreApp.controller('booksController',
              */
             $scope.delete = function(book){
                 bookService.deleteBook(book, function(data) {
-                    var index = $scope.books.indexOf(toSave);
+                    var index = $scope.books.indexOf(book);
                     if (index > -1) {
                         $scope.books.splice(index, 1);
                     }
