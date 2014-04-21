@@ -60,13 +60,13 @@
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
-                    <a href = "#" ng-click = "bookReturn(book)">Return</a>
+                    <a class="btn btn-link" ng-click = "bookReturn(book)">Return</a>
                 </td>
                 <td ng-hide = "isBorrowed(book)">
-                    <a href = "#" ng-click = "bookBorrow(book)">Borrow</a>
+                    <a class="btn btn-link" ng-click = "bookBorrow(book)">Borrow</a>
                 </td>
                 <td>
-                    <a href = "#" ng-click = "delete(book)">
+                    <a class="btn btn-link" ng-click = "delete(book)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </td>
