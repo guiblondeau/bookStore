@@ -129,5 +129,5 @@ bookStoreApp.controller('booksController',
             $scope.delete = function(book){
                 console.log(book);
             }
-            
+
         }]);
