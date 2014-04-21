@@ -122,4 +122,12 @@ bookStoreApp.controller('booksController',
                 }
                 bookService.saveBook(toSave, success, failure);
             }
+
+            /*
+            Delete a book
+             */
+            $scope.delete = function(book){
+                console.log(book);
+            }
+            
         }]);

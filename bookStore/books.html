@@ -54,6 +54,7 @@
                 <th style = "text-align : center">Name</th>
                 <th style = "text-align : center">Borrower</th>
                 <th style = "text-align : center">Edit</th>
+                <th style = "text-align : center">Delete</th>
             </tr>
             <tr ng-repeat = "book in books">
                 <td>{{book.name}}</td>
@@ -63,6 +64,11 @@
                 </td>
                 <td ng-hide = "isBorrowed(book)">
                     <a class = "btn btn-default" ng-click = "bookBorrow(book)">Borrow</a>
+                </td>
+                <td>
+                    <a ng-click = "delete(book)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
                 </td>
             </tr>
         </table>
