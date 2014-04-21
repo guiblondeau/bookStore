@@ -16,6 +16,10 @@ booksService.factory('booksService', ['$http', function($http){
         $http.post('../books/', book).success(success, failure);
     }
 
+    service.deleteBook = function(book, success, failure) {
+        $http.delete('../books/'+book.id).success(success, failure);
+    }
+
     return service;
 
 }]);

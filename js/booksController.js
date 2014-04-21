@@ -8,19 +8,14 @@ bookStoreApp.controller('booksController',
             /*
              Get books
              */
-
             var books;
 
-            var successGet = function(data) {
+            bookService.getBooks(function(data) {
                 books = data.list;
                 $scope.books =  books;
-            }
-
-            var failureGet = function(data) {
-                console.log("error")
-            }
-
-            bookService.getBooks(successGet, failureGet);
+            }, function(data) {
+                console.log("fail "+data);
+            });
 
             $scope.getBorrowed = function() {
                 $scope.books =  books.filter(function(book){
@@ -41,19 +36,17 @@ bookStoreApp.controller('booksController',
             /*
              Get users
              */
-
-            var successGetUsers = function(data) {
+            usersService.getUsers(function(data) {
                 console.log(data);
                 $scope.users =  data.list;
-            }
-
-            usersService.getUsers(successGetUsers, failureGet);
+            }, function(data) {
+                console.log("fail "+data);
+            });
 
 
             /*
              Borrow functions
              */
-
             $scope.isBorrowed = function(book) {
                 return (book.borrower != undefined) && (book.borrower != null);
             }
@@ -75,14 +68,12 @@ bookStoreApp.controller('booksController',
                     borrower : $scope.user
                 }
                 console.log(toSave);
-                var success = function(data) {
+                bookService.updateBook(toSave, function(data) {
                     $scope.borrow = false;
                     $location.path('#/books/');
-                }
-                var failure = function (data) {
-                    console.log("fail");
-                }
-                bookService.updateBook(toSave, success, failure);
+                }, function (data) {
+                    console.log("fail "+data);
+                });
                 $scope.borrow = false;
             }
 
@@ -94,14 +85,12 @@ bookStoreApp.controller('booksController',
                     name : $scope.bookName
                 }
                 console.log(toSave);
-                var success = function(data) {
+                bookService.saveBook(toSave, function(data) {
                     $scope.create = false;
                     $location.path('#/books/');
-                }
-                var failure = function (data) {
-                    console.log("fail");
-                }
-                bookService.saveBook(toSave, success, failure);
+                }, function (data) {
+                    console.log("fail "+data);
+                });
                 $scope.borrow = false;
             }
 
@@ -114,20 +103,25 @@ bookStoreApp.controller('booksController',
                     id : $scope.book.id,
                     name : $scope.book.name
                 }
-                console.log(toSave);
-                var success = function(data) {
-                }
-                var failure = function (data) {
-                    console.log("fail");
-                }
-                bookService.saveBook(toSave, success, failure);
+                bookService.saveBook(toSave, function(data) {
+                    $location.path('#/books/');
+                }, function(data) {
+                    console.log("fail " + data)
+                });
             }
 
             /*
             Delete a book
              */
             $scope.delete = function(book){
-                console.log(book);
+                bookService.deleteBook(book, function(data) {
+                    var index = $scope.book.indexOf(toSave);
+                    if (index > -1) {
+                        $scope.book.splice(index, 1);
+                    }
+                }, function(data) {
+                    console.log("fail " + data)
+                });
             }
 
         }]);
