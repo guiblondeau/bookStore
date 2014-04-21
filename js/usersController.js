@@ -5,20 +5,18 @@ bookStoreApp.controller('usersController',
     ['$scope', 'usersService', '$location', '$routeParams',
         function($scope, usersService, $location, $routeParams){
 
-            var successGet = function(data) {
+            /*
+            Retrieve users
+             */
+            usersService.getUsers(function(data) {
                 $scope.users =  data.list;
-            }
-
-            var failureGet = function(data) {
-                console.log("error");
-            }
-
-            usersService.getUsers(successGet, failureGet);
+            }, function(data) {
+                console.log("fail "+data);
+            });
 
             /*
             Create user
              */
-
             $scope.save = function() {
                 var toSave = {
                     name : $scope.userName
@@ -28,6 +26,20 @@ bookStoreApp.controller('usersController',
                     $scope.create = false;
                 }, function(data){
                     console.log("error");
+                });
+            }
+
+            /*
+            Delete user
+             */
+            $scope.delete = function(user) {
+                usersService.deleteUser(user, function(data) {
+                    var index = $scope.users.indexOf(user);
+                    if (index > -1) {
+                        $scope.users.splice(index, 1);
+                    }
+                }, function(data) {
+                    console.log("fail " + data)
                 });
             }
         }

@@ -36,5 +36,9 @@ booksService.factory('usersService', ['$http', function($http){
         return $http.post('../users/', user).success(success, failure);
     }
 
+    service.deleteUser = function(user, success, failure) {
+        return $http.delete('../users/'+user.id).success(success, failure);
+    }
+
     return service;
 }]);
