@@ -2,43 +2,39 @@ var booksService = angular.module('bookStore.services', []);
 
 booksService.factory('booksService', ['$http', function($http){
 
-    var service = {};
+    return {
+        getBooks : function(success, failure) {
+            return $http.get('../books/?strategy=load').success(success, failure);
+        },
 
-    service.getBooks = function(success, failure) {
-        return $http.get('../books/?strategy=load').success(success, failure);
+        updateBook : function(book, success, failure) {
+            $http.put('../books/'+book.id, book).success(success, failure);
+        },
+
+        saveBook : function(book, success, failure) {
+            $http.post('../books/', book).success(success, failure);
+        },
+
+        deleteBook : function(book, success, failure) {
+            $http.delete('../books/'+book.id).success(success, failure);
+        }
     };
-
-    service.updateBook = function(book, success, failure) {
-        $http.put('../books/'+book.id, book).success(success, failure);
-    }
-
-    service.saveBook = function(book, success, failure) {
-        $http.post('../books/', book).success(success, failure);
-    }
-
-    service.deleteBook = function(book, success, failure) {
-        $http.delete('../books/'+book.id).success(success, failure);
-    }
-
-    return service;
 
 }]);
 
 booksService.factory('usersService', ['$http', function($http){
 
-    var service = {};
+    return {
+        getUsers : function(success, failure) {
+            return $http.get('../users/').success(success, failure);
+        },
 
-    service.getUsers = function(success, failure) {
-        return $http.get('../users/').success(success, failure);
+        createUser : function(user, success, failure) {
+            return $http.post('../users/', user).success(success, failure);
+        },
+
+        deleteUser : function(user, success, failure) {
+            return $http.delete('../users/'+user.id).success(success, failure);
+        }
     }
-
-    service.createUser = function(user, success, failure) {
-        return $http.post('../users/', user).success(success, failure);
-    }
-
-    service.deleteUser = function(user, success, failure) {
-        return $http.delete('../users/'+user.id).success(success, failure);
-    }
-
-    return service;
 }]);
