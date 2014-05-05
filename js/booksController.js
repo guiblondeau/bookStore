@@ -58,6 +58,11 @@ bookStoreApp.controller('booksController',
                 $scope.borrow = true;
             }
 
+            $scope.bookReturn = function(book) {
+                $scope.book = book;
+                $scope.update();
+            }
+
             /*
              Update a book
              */
@@ -92,22 +97,6 @@ bookStoreApp.controller('booksController',
                     console.log("fail "+data);
                 });
                 $scope.borrow = false;
-            }
-
-            /*
-             Return a book
-             */
-            $scope.bookReturn = function(book) {
-                $scope.book = book;
-                var toSave = {
-                    id : $scope.book.id,
-                    name : $scope.book.name
-                }
-                bookService.saveBook(toSave, function(data) {
-                    $location.path('#/books/');
-                }, function(data) {
-                    console.log("fail " + data)
-                });
             }
 
             /*
