@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div>
+    <div class = "well">
         <div class = "form-group">
             <label>Book name</label>
             <input type="text" class="form-control" placeholder = "Book name" ng-model="name">
@@ -63,7 +63,7 @@
                 <th style = "text-align : center">Edit</th>
                 <th style = "text-align : center">Delete</th>
             </tr>
-            <tr ng-repeat = "book in filteredBooks = (books | fieldFilter:name:'name'">
+            <tr ng-repeat = "book in filteredBooks = (books | filter:name">
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
