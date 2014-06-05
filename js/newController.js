@@ -6,115 +6,22 @@
  */
 var testApp = angular.module('testApp', []);
 testApp.controller('booksController',
-    ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
-        function($scope, bookService, usersService, $location, $routeParams){
+    ['$scope', '$http',
+        function($scope, $http){
 
             /*
              Get books
              */
-            var books;
-
-            bookService.getBooks(function(data) {
-                books = data.list;
-                $scope.books =  books;
-            }, function(data) {
-                console.log("fail "+data);
+            $http.get('../books/?strategy=load').success(function(data){
+                $scope.books =  data.list;
+            }, function(data){
+                $scope.books =  data.list;
             });
 
-            $scope.getBorrowed = function() {
-                $scope.books =  books.filter(function(book){
-                    return (book.borrower != undefined) && (book.borrower != null)
-                });
-            }
-
-            $scope.getFree = function() {
-                $scope.books =  books.filter(function(book){
-                    return (book.borrower == undefined) || (book.borrower == null)
-                });
-            }
-
-            $scope.getAll = function() {
-                $scope.books = books;
-            }
-
-            /*
-             Get users
-             */
-            usersService.getUsers(function(data) {
-                console.log(data);
+            $http.get('../books/?strategy=load').success(function(data){
                 $scope.users =  data.list;
-            }, function(data) {
-                console.log("fail "+data);
+            }, function(data){
+                $scope.users =  data.list;
             });
-
-
-            /*
-             Borrow functions
-             */
-            $scope.isBorrowed = function(book) {
-                return (book.borrower != undefined) && (book.borrower != null);
-            }
-
-            $scope.borrow = false;
-
-            $scope.bookBorrow = function(book) {
-                $scope.book = book;
-                $scope.borrow = true;
-            }
-
-            $scope.bookReturn = function(book) {
-                $scope.book = book;
-                $scope.update();
-            }
-
-            /*
-             Update a book
-             */
-            $scope.update = function() {
-                var toSave = {
-                    id : $scope.book.id,
-                    name : $scope.book.name,
-                    borrower : $scope.user
-                }
-                console.log(toSave);
-                bookService.updateBook(toSave, function(data) {
-                    $scope.borrow = false;
-                    $location.path('#/books/');
-                }, function (data) {
-                    console.log("fail "+data);
-                });
-                $scope.borrow = false;
-            }
-
-            /*
-             Save a book
-             */
-            $scope.save = function() {
-                var toSave = {
-                    name : $scope.bookName
-                }
-                console.log(toSave);
-                bookService.saveBook(toSave, function(data) {
-                    $scope.create = false;
-                    $location.path('#/books/');
-                }, function (data) {
-                    console.log("fail "+data);
-                });
-                $scope.borrow = false;
-            }
-
-            /*
-             Delete a book
-             */
-            $scope.delete = function(book){
-                bookService.deleteBook(book, function(data) {
-                    var index = $scope.books.indexOf(book);
-                    if (index > -1) {
-                        $scope.books.splice(index, 1);
-                    }
-                }, function(data) {
-                    console.log("fail " + data)
-                });
-            }
 
         }]);
