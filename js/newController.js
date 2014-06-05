@@ -5,7 +5,7 @@
  * Created by guillaume on 20/04/14.
  */
 var testApp = angular.module('testApp', []);
-testApp.controller('booksController',
+testApp.controller('newController',
     ['$scope', '$http',
         function($scope, $http){
 
