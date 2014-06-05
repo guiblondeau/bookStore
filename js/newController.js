@@ -4,7 +4,8 @@
 /**
  * Created by guillaume on 20/04/14.
  */
-bookStoreApp.controller('booksController',
+var testApp = angular.module('testApp', []);
+testApp.controller('booksController',
     ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
         function($scope, bookService, usersService, $location, $routeParams){
 
