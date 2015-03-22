@@ -90,7 +90,6 @@ bookStoreApp.controller('booksController',
                 };
                 bookService.saveBook(toSave, function(addedBook) {
                     $scope.create = false;
-                    $location.path('#/books/');
                     books.push(addedBook);
                     $scope.books.push(addedBook);
                 }, function (data) {
