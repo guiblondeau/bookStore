@@ -6,15 +6,15 @@
         <form role = "form">
             <div class="form-group">
                 <label>Book name</label>
-                <p class="form-control-static">{{book.name}}</p>
+                <p class="form-control-static">{{selectedBook.name}}</p>
             </div>
             <div class="form-group">
                 <label>Borrower</label>
                 <select class = "form-control" ng-model="user" ng-options="user.name for user in users">
                 </select>
             </div>
-            <a class="btn btn-info" ng-click = "borrow = false">Cancel</a>
-            <a class="btn btn-default" ng-click = "update()">Borrow</a>
+            <a class="btn btn-info" ng-click="stopBorrowing()">Cancel</a>
+            <a class="btn btn-default" ng-click="update()">Borrow</a>
         </form>
     </div>
 
@@ -24,7 +24,7 @@
                 <label>Book name</label>
                 <input class = "form-control" ng-model = "bookNameToAdd" placeholder = "Book name">
             </div>
-            <a class="btn btn-info" ng-click = "create = false">Cancel</a>
+            <a class="btn btn-info" ng-click = "stopCreatingBook()">Cancel</a>
             <a class="btn btn-default" ng-click = "saveBook(bookNameToAdd)">Create</a>
         </form>
     </div>
@@ -78,7 +78,7 @@
                 <td>
                     <a class="btn btn-link" ng-click = "delete(book)">
                         <span class="glyphicon glyphicon-remove"></span>
-                    </a>
+                    </a>book
                 </td>
             </tr>
         </table>

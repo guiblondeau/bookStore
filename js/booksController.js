@@ -10,12 +10,14 @@ bookStoreApp.controller('booksController',
              */
             var books;
 
-            bookService.getBooks(function(data) {
-                books = data.list;
-                $scope.books =  books;
-            }, function(data) {
-                console.log("fail "+data);
-            });
+            function getBooks () {
+                bookService.getBooks(function(data) {
+                    books = data.list;
+                    $scope.books =  books;
+                }, function(data) {
+                    console.log("fail "+data);
+                });
+            }
 
             $scope.getBorrowedBooks = function() {
                 $scope.books =  books.filter(function(book){
@@ -48,32 +50,36 @@ bookStoreApp.controller('booksController',
              Borrow functions
              */
             $scope.isBorrowed = function(book) {
-                return (book.borrower != undefined) && (book.borrower != null);
+                return !_isEmpty(book.borrower);
             }
 
             $scope.isBorrowing = false;
 
+            $scope.stopBorrowing = function () {
+                $scope.isBorrowing = false;
+            }
+
             $scope.bookBorrow = function(book) {
-                $scope.book = book;
+                $scope.selectedBook = book;
                 $scope.isBorrowing = true;
             }
 
             $scope.bookReturn = function(book) {
-                $scope.book = book;
+                $scope.selectedBook = book;
                 $scope.update();
             }
 
             /*
-             Update a book
+             Update a Book
              */
             $scope.update = function() {
                 var toSave = {
-                    id : $scope.book.id,
-                    name : $scope.book.name,
+                    id : $scope.selectedBook.id,
+                    name : $scope.selectedBook.name,
                     borrower : _.omit($scope.user, 'id')
                 };
                 bookService.updateBook(toSave, function(updatedBook) {
-                    $scope.book = updatedBook;
+                    $scope.selectedBook = updatedBook;
                     $scope.isBorrowing = false;
                 }, function (data) {
                     console.log("fail "+data);
@@ -82,24 +88,28 @@ bookStoreApp.controller('booksController',
             }
 
             /*
-             Save a book
+             Save a Book
              */
+
+            $scope.stopCreatingBook = function () {
+                $scope.create = false;
+            };
+
             $scope.saveBook = function(bookNameToAdd) {
                 var toSave = {
                     name : bookNameToAdd
                 };
                 bookService.saveBook(toSave, function(addedBook) {
                     $scope.create = false;
-                    books.push(addedBook);
-                    $scope.books.push(addedBook);
+                    getBooks();
                 }, function (data) {
                     console.log("fail "+data);
                 });
                 $scope.isBorrowing = false;
-            }
+            };
 
             /*
-            Delete a book
+            Delete a selectedBook
              */
             $scope.delete = function(book){
                 bookService.deleteBook(book, function(data) {
