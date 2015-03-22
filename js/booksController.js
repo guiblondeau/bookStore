@@ -114,7 +114,7 @@ bookStoreApp.controller('booksController',
             /*
             Delete a selectedBook
              */
-            $scope.delete = function(book){
+            $scope.deleteBook = function(book){
                 bookService.deleteBook(book, function(data) {
                     var index = $scope.books.indexOf(book);
                     if (index > -1) {
@@ -123,6 +123,6 @@ bookStoreApp.controller('booksController',
                 }, function(data) {
                     console.log("fail " + data)
                 });
-            }
+            };
 
         }]);
