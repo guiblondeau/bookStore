@@ -61,12 +61,12 @@ bookStoreApp.controller('booksController',
                 $scope.isBorrowing = false;
             }
 
-            $scope.bookBorrow = function(book) {
+            $scope.borrowBook = function(book) {
                 $scope.selectedBook = book;
                 $scope.isBorrowing = true;
             }
 
-            $scope.bookReturn = function(book) {
+            $scope.returnBook = function(book) {
                 $scope.selectedBook = book;
                 var toSave = {
                     id : $scope.selectedBook.id,
@@ -75,9 +75,11 @@ bookStoreApp.controller('booksController',
                 };
                 bookService.updateBook(toSave, function(updatedBook) {
                     $scope.selectedBook = updatedBook;
+                    _.find($scope.books, { id: $scope.updatedBook.id }) = updatedBook;
                 }, function (data) {
                     console.log("fail "+data);
                 });
+
             }
 
             /*

@@ -70,10 +70,10 @@
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
-                    <a class="btn btn-link" ng-click = "bookReturn(book)">Return</a>
+                    <a class="btn btn-link" ng-click = "returnBook(book)">Return</a>
                 </td>
                 <td ng-hide = "isBorrowed(book)">
-                    <a class="btn btn-link" ng-click = "bookBorrow(book)">Borrow</a>
+                    <a class="btn btn-link" ng-click = "borrowBook(book)">Borrow</a>
                 </td>
                 <td>
                     <a class="btn btn-link" ng-click = "deleteBook(book)">
