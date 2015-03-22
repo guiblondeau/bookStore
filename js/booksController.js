@@ -103,7 +103,8 @@ bookStoreApp.controller('booksController',
                 };
                 bookService.saveBook(toSave, function(addedBook) {
                     $scope.create = false;
-                    getBooks();
+                    $scope.books.push(addedBook);
+                    books.push(addedBook);
                 }, function (data) {
                     console.log("fail "+data);
                 });
