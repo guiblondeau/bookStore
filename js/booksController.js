@@ -19,6 +19,8 @@ bookStoreApp.controller('booksController',
                 });
             }
 
+            getBooks();
+
             $scope.getBorrowedBooks = function() {
                 $scope.books =  books.filter(function(book){
                     return !_isEmpty(book.borrower);
