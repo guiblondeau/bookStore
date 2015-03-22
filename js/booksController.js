@@ -51,11 +51,11 @@ bookStoreApp.controller('booksController',
                 return (book.borrower != undefined) && (book.borrower != null);
             }
 
-            $scope.borrow = false;
+            $scope.isBorrowing = false;
 
             $scope.bookBorrow = function(book) {
                 $scope.book = book;
-                $scope.borrow = true;
+                $scope.isBorrowing = true;
             }
 
             $scope.bookReturn = function(book) {
@@ -74,29 +74,30 @@ bookStoreApp.controller('booksController',
                 }
                 console.log(toSave);
                 bookService.updateBook(toSave, function(data) {
-                    $scope.borrow = false;
+                    $scope.isBorrowing = false;
                     $location.path('#/books/');
                 }, function (data) {
                     console.log("fail "+data);
                 });
-                $scope.borrow = false;
+                $scope.isBorrowing = false;
             }
 
             /*
              Save a book
              */
-            $scope.save = function() {
+            $scope.saveBook = function(bookNameToAdd) {
                 var toSave = {
-                    name : $scope.bookName
-                }
-                console.log(toSave);
-                bookService.saveBook(toSave, function(data) {
+                    name : bookNameToAdd
+                };
+                bookService.saveBook(toSave, function(addedBook) {
                     $scope.create = false;
                     $location.path('#/books/');
+                    books.append(addedBook);
+                    $scope.books(addedBook);
                 }, function (data) {
                     console.log("fail "+data);
                 });
-                $scope.borrow = false;
+                $scope.isBorrowing = false;
             }
 
             /*
