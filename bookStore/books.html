@@ -66,7 +66,7 @@
                 <th style = "text-align : center">Edit</th>
                 <th style = "text-align : center">Delete</th>
             </tr>
-            <tr ng-repeat = "book in books | filter:bookNameFilter">
+            <tr ng-repeat = "book in books track by $index | filter:bookNameFilter">
                 <td>{{book.name}}</td>
                 <td>{{book.borrower.name}}</td>
                 <td ng-show = "isBorrowed(book)">
