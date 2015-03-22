@@ -23,13 +23,13 @@ bookStoreApp.controller('booksController',
 
             $scope.getBorrowedBooks = function() {
                 $scope.books =  books.filter(function(book){
-                    return !_isEmpty(book.borrower);
+                    return !_.isEmpty(book.borrower);
                 });
             }
 
             $scope.getFreeBooks = function() {
                 $scope.books =  books.filter(function(book){
-                    return !_isEmpty(book.borrower);
+                    return !_.isEmpty(book.borrower);
                 });
             }
 
@@ -52,7 +52,7 @@ bookStoreApp.controller('booksController',
              Borrow functions
              */
             $scope.isBorrowed = function(book) {
-                return !_isEmpty(book.borrower);
+                return !_.isEmpty(book.borrower);
             }
 
             $scope.isBorrowing = false;
