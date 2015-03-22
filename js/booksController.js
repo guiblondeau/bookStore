@@ -73,7 +73,7 @@ bookStoreApp.controller('booksController',
                     borrower : _.omit($scope.user, 'id')
                 };
                 bookService.updateBook(toSave, function(updatedBook) {
-                    $scope.book = data;
+                    $scope.book = updatedBook;
                     $scope.isBorrowing = false;
                 }, function (data) {
                     console.log("fail "+data);
