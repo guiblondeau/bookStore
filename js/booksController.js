@@ -13,7 +13,7 @@ bookStoreApp.controller('booksController',
             function getBooks () {
                 bookService.getBooks(function(data) {
                     books = data.list;
-                    $scope.books =  books;
+                    $scope.books = _.copyDeep(books);
                 }, function(data) {
                     console.log("fail "+data);
                 });
@@ -22,15 +22,15 @@ bookStoreApp.controller('booksController',
             getBooks();
 
             $scope.getBorrowedBooks = function() {
-                $scope.books =  books.filter(function(book){
+                $scope.books =  _.copyDeep(books.filter(function(book){
                     return !_.isEmpty(book.borrower);
-                });
+                }));
             }
 
             $scope.getFreeBooks = function() {
-                $scope.books =  books.filter(function(book){
+                $scope.books =  _.copyDeep(books.filter(function(book){
                     return !_.isEmpty(book.borrower);
-                });
+                }));
             }
 
             $scope.getAllBooks = function() {
