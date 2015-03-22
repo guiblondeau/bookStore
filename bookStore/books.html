@@ -1,8 +1,8 @@
-<div class = "container-fluid">
+<div class="container-fluid">
 
-    <h2 align = "center">Books</h2>
+    <h2 align="center">Books</h2>
 
-    <div ng-show = "borrow" class = "well">
+    <div ng-show="isBorrowing" class="well">
         <form role = "form">
             <div class="form-group">
                 <label>Book name</label>
@@ -32,9 +32,9 @@
     <div class = "row">
         <div class = "col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div align = "center" class="btn-group">
-                <a type="button" ng-click = "getBorrowed()" class="btn btn-default">Borrowed books</a>
-                <a type="button" ng-click = "getAll()" class="btn btn-default">All books</a>
-                <a type="button" ng-click = "getFree()" class="btn btn-default">Available books</a>
+                <a type="button" ng-click = "getBorrowedBooks()" class="btn btn-default">Borrowed books</a>
+                <a type="button" ng-click = "getAllBooks()" class="btn btn-default">All books</a>
+                <a type="button" ng-click = "getFreeBooks()" class="btn btn-default">Available books</a>
             </div>
         </div>
 

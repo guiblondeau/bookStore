@@ -17,19 +17,19 @@ bookStoreApp.controller('booksController',
                 console.log("fail "+data);
             });
 
-            $scope.getBorrowed = function() {
+            $scope.getBorrowedBooks = function() {
                 $scope.books =  books.filter(function(book){
-                    return (book.borrower != undefined) && (book.borrower != null)
+                    return !_isEmpty(book.borrower);
                 });
             }
 
-            $scope.getFree = function() {
+            $scope.getFreeBooks = function() {
                 $scope.books =  books.filter(function(book){
-                    return (book.borrower == undefined) || (book.borrower == null)
+                    return !_isEmpty(book.borrower);
                 });
             }
 
-            $scope.getAll = function() {
+            $scope.getAllBooks = function() {
                 $scope.books = books;
             }
 
