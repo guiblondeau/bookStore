@@ -70,12 +70,10 @@ bookStoreApp.controller('booksController',
                 var toSave = {
                     id : $scope.book.id,
                     name : $scope.book.name,
-                    borrower : $scope.user
-                }
-                console.log(toSave);
+                    borrower : _.omit($scope.user, 'id')
+                };
                 bookService.updateBook(toSave, function(data) {
                     $scope.isBorrowing = false;
-                    $location.path('#/books/');
                 }, function (data) {
                     console.log("fail "+data);
                 });
