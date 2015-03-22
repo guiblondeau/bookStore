@@ -75,7 +75,8 @@ bookStoreApp.controller('booksController',
                 };
                 bookService.updateBook(toSave, function(updatedBook) {
                     $scope.selectedBook = updatedBook;
-                    _.find($scope.books, { id: updatedBook.id }) = updatedBook;
+                    var initialBook = _.find($scope.books, { id: updatedBook.id })
+                    initialBook = updatedBook;
                 }, function (data) {
                     console.log("fail "+data);
                 });
