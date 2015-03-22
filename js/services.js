@@ -4,7 +4,7 @@ booksService.factory('booksService', ['$http', function($http){
 
     return {
         getBooks : function(success, failure) {
-            return $http.get('../books/?strategy=load').success(success, failure);
+            return $http.get('../books/').success(success, failure);
         },
 
         updateBook : function(book, success, failure) {
