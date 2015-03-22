@@ -68,7 +68,16 @@ bookStoreApp.controller('booksController',
 
             $scope.bookReturn = function(book) {
                 $scope.selectedBook = book;
-                $scope.update();
+                var toSave = {
+                    id : $scope.selectedBook.id,
+                    name : $scope.selectedBook.name,
+                    borrower : null
+                };
+                bookService.updateBook(toSave, function(updatedBook) {
+                    $scope.selectedBook = updatedBook;
+                }, function (data) {
+                    console.log("fail "+data);
+                });
             }
 
             /*
@@ -82,7 +91,6 @@ bookStoreApp.controller('booksController',
                 };
                 bookService.updateBook(toSave, function(updatedBook) {
                     $scope.selectedBook = updatedBook;
-                    $scope.isBorrowing = false;
                 }, function (data) {
                     console.log("fail "+data);
                 });
