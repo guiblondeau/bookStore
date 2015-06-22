@@ -1,33 +1,36 @@
-<div class = "container">
+<div class="container">
 
-    <h2 align = "center">Users</h2>
+    <h2 align="""center">Users</h2>
 
-    <div class = "well" ng-show = "create">
+    <div class="well" ng-show="isAddingUser">
         <form>
-            <div class = "form-group">
-                <label>User name</label>
-                <input class = "form-control" ng-model = "userName" placeholder = "Book name">
+            <div class="form-group">
+                <label>Add a user</label>
+                <input class="form-control" ng-model="userToSave.name">
             </div>
-            <a class="btn btn-info" ng-click = "create = false">Cancel</a>
-            <a class="btn btn-default" ng-click = "save()">Create</a>
+            <div align="right">
+                <a class="btn btn-default" ng-click="closeAddUserForm()">Cancel</a>
+                <a class="btn btn-primary" ng-click="saveUser(userToSave)">Create</a>
+            </div>
         </form>
     </div>
 
-    <a type = "button" class = "btn btn-default" ng-click = "create = true">Add user</a>
-
-    <br/>
-    <br/>
-
     <div>
-        <table class = "table table-striped table-hover table-bordered" style = "text-align : center" id = "books">
+    <a type = "button" class = "btn btn-default" ng-click = "displayAddUserForm()">Add user</a>
+    </div>
+
+    <br/>
+    
+    <div>
+        <table class="table table-striped table-hover table-bordered" class="text-center" id="books">
             <tr>
-                <th style = "text-align : center">Name</th>
-                <th style = "text-align : center">Delete</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Delete</th>
             </tr>
             <tr ng-repeat = "user in users">
-                <td>{{user.name}}</td>
-                <td>
-                    <a class = "btn btn-link" ng-click = "delete(user)">
+                <td class="text-center">{{user.name}}</td>
+                <td class="text-center">
+                    <a class="btn btn-link" ng-click="deleteUser(user)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </td>

@@ -5,43 +5,44 @@ bookStoreApp.controller('usersController',
     ['$scope', 'usersService', '$location', '$routeParams',
         function($scope, usersService, $location, $routeParams){
 
-            /*
-            Retrieve users
-             */
             usersService.getUsers(function(data) {
                 $scope.users =  data.list;
             }, function(data) {
                 console.log("fail "+data);
             });
 
-            /*
-            Create user
-             */
-            $scope.saveBook = function() {
-                var toSave = {
-                    name : $scope.userName
-                };
-                usersService.createUser(toSave, function(data){
+            function initializeUserForm () {
+                $scope.userToSave = {};
+            };
+
+            $scope.saveUser = function(userToSave) {
+                usersService.createUser(userToSave, function(data){
                     $scope.users.push(data);
-                    $scope.create = false;
+                    $scope.isAddingUser = false;
                 }, function(data){
                     console.log("error");
                 });
-            }
+            };
 
-            /*
-            Delete user
-             */
-            $scope.delete = function(user) {
-                usersService.deleteUser(user, function(data) {
-                    var index = $scope.users.indexOf(user);
-                    if (index > -1) {
-                        $scope.users.splice(index, 1);
-                    }
+            $scope.displayAddUserForm = function() {
+                $scope.isAddingUser = true;
+                initializeUserForm();
+            };
+
+            $scope.closeAddUserForm = function() {
+                $scope.isAddingUser = false;
+            };
+
+            $scope.deleteUser = function(userToDelete) {
+                usersService.deleteUser(userToDelete, function() {
+                    _.remove($scope.users, function(user) {
+                        return _.isEqual(user, userToDelete)
+                    });
                 }, function(data) {
-                    console.log("fail " + data)
+                    console.log('fail ' + data)
                 });
-            }
+            };
+
         }
     ]
 );

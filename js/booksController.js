@@ -1,13 +1,7 @@
-/**
- * Created by guillaume on 20/04/14.
- */
 bookStoreApp.controller('booksController',
     ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
         function($scope, bookService, usersService, $location, $routeParams){
 
-            /*
-             Get books
-             */
             var books;
 
             function getBooks () {
@@ -15,7 +9,7 @@ bookStoreApp.controller('booksController',
                     books = data.list;
                     $scope.books = _.cloneDeep(books);
                 }, function(data) {
-                    console.log("fail "+data);
+                    console.log('fail ' +data);
                 });
             }
 
@@ -44,7 +38,7 @@ bookStoreApp.controller('booksController',
                 console.log(data);
                 $scope.users =  data.list;
             }, function(data) {
-                console.log("fail "+data);
+                console.log('fail ' + data);
             });
 
 
