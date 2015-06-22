@@ -1,57 +1,51 @@
-<div class="container-fluid">
+<div class="container">
 
     <h2 align="center">Books</h2>
 
-    <div ng-show="isBorrowing" class="well">
-        <form role = "form">
+    <div ng-show="isCreatingBook" class = "well">
+        <form role="form">
             <div class="form-group">
                 <label>Book name</label>
-                <p class="form-control-static">{{selectedBook.name}}</p>
+                <input class="form-control" ng-model="bookNameToAdd" placeholder="Book name">
+            </div>
+            <div align="right">
+                <a class="btn btn-default" ng-click="stopCreatingBook()">Cancel</a>
+                <a class="btn btn-primary" ng-click="saveBook(bookNameToAdd)">Create</a>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="isBorrowing" class="well">
+        <form role="form">
+            <div class="form-group">
+                <label>Book name</label>
+                <p class="form-control-static">{{selectedBookCopy.name}}</p>
             </div>
             <div class="form-group">
                 <label>Borrower</label>
-                <select class = "form-control" ng-model="user" ng-options="user.name for user in users">
+                <select class="form-control" ng-model="selectedBookCopy.borrower" ng-options="user.name for user in users">
                 </select>
             </div>
-            <a class="btn btn-info" ng-click="stopBorrowing()">Cancel</a>
-            <a class="btn btn-default" ng-click="update()">Borrow</a>
+            <div align="right">
+                <a class="btn btn-default" ng-click="stopBorrowing()">Cancel</a>
+                <a class="btn btn-primary" ng-click="updateBook(selectedBookCopy)">Borrow</a>
+            </div>
         </form>
     </div>
 
-    <div ng-show = "create" class = "well">
-        <form role = "form">
-            <div class = "form-group">
-                <label>Book name</label>
-                <input class = "form-control" ng-model = "bookNameToAdd" placeholder = "Book name">
-            </div>
-            <a class="btn btn-info" ng-click = "stopCreatingBook()">Cancel</a>
-            <a class="btn btn-default" ng-click = "saveBook(bookNameToAdd)">Create</a>
-        </form>
-    </div>
-
-    <div class = "row">
-        <div class = "col-md-6 col-lg-6 col-sm-12 col-xs-12">
-            <div align = "center" class="btn-group">
-                <a type="button" ng-click = "getBorrowedBooks()" class="btn btn-default">Borrowed books</a>
-                <a type="button" ng-click = "getAllBooks()" class="btn btn-default">All books</a>
-                <a type="button" ng-click = "getFreeBooks()" class="btn btn-default">Available books</a>
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div align="center" class="btn-group">
+                <a type="button" ng-click="getBorrowedBooks()" class="btn btn-default">Borrowed books</a>
+                <a type="button" ng-click="getAllBooks()" class="btn btn-default">All books</a>
+                <a type="button" ng-click="getFreeBooks()" class="btn btn-default">Available books</a>
             </div>
         </div>
 
-        <div class = "col-md-6 col-lg-6 col-sm-12 col-xs-12">
-            <div align = "right">
-                <a class="btn btn-default" ng-click = "create = true">Add book</a>
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div align="right">
+                <a class="btn btn-default" ng-click="startCreatingBook()">Add book</a>
             </div>
-        </div>
-    </div>
-
-    <br/>
-    <br/>
-
-    <div class = "well">
-        <div class = "form-group">
-            <label>Filter : book name</label>
-            <input type="text" class="form-control" placeholder = "Book name" ng-model="bookNameFilter">
         </div>
     </div>
 
@@ -59,24 +53,24 @@
     <br/>
 
     <div>
-        <table class = "table table-striped table-hover table-bordered" style = "text-align : center" id = "books">
+        <table class="table table-striped table-hover table-bordered" id="books">
             <tr>
-                <th style = "text-align : center">Name</th>
-                <th style = "text-align : center">Borrower</th>
-                <th style = "text-align : center">Edit</th>
-                <th style = "text-align : center">Delete</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Borrower</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
             </tr>
-            <tr ng-repeat = "book in books track by $index | filter:bookNameFilter">
-                <td>{{book.name}}</td>
-                <td>{{book.borrower.name}}</td>
-                <td ng-show = "isBorrowed(book)">
-                    <a class="btn btn-link" ng-click = "returnBook(book)">Return</a>
+            <tr ng-repeat="book in books">
+                <td class="text-center">{{book.name}}</td>
+                <td class="text-center">{{book.borrower.name}}</td>
+                <td ng-show="isBorrowed(book)" class="text-center">
+                    <a class="btn btn-link" ng-click="returnBook(book)">Return</a>
                 </td>
-                <td ng-hide = "isBorrowed(book)">
-                    <a class="btn btn-link" ng-click = "borrowBook(book)">Borrow</a>
+                <td ng-hide="isBorrowed(book)" class="text-center">
+                    <a class="btn btn-link" ng-click="borrowBook(book)">Borrow</a>
                 </td>
-                <td>
-                    <a class="btn btn-link" ng-click = "deleteBook(book)">
+                <td class="text-center">
+                    <a class="btn btn-link" ng-click="deleteBook(book)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </td>
