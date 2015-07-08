@@ -1,8 +1,13 @@
 bookStoreApp.controller('booksController',
-    ['$scope', 'booksService', 'usersService', '$location', '$routeParams',
-        function($scope, bookService, usersService, $location, $routeParams){
+    ['$scope', 'booksService', 'usersService', '$location', '$routeParams', 'BookStoreClientResource',
+        function($scope, bookService, usersService, $location, $routeParams, BookStoreClientResource){
 
             var books;
+
+            var bookStoreClientResource = new BookStoreClientResource();
+            bookStoreClientResource.getBookList().then(function(data) {
+                console.log(data);
+            });
 
             function initializeUserView() {
                 getBooks();
