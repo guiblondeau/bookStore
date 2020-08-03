@@ -2,191 +2,13 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "Tasks API",
-    "description" : "An API for managing a list of tasks that need to be done. \n\nDon't forget to take it for a spin by clicking on the **Try in Client** button next to each operation! All read operations are public and don't require authentication.\n",
+    "description" : "An API for managing a list of tasks that need to be done",
     "contact" : { },
     "version" : "1.1.0"
   },
-  "servers" : [ {
-    "url" : "https://tasksapi.restlet.net/v1"
-  } ],
   "paths" : {
-    "/tasks/" : {
-      "get" : {
-        "summary" : "Load the list of Tasks",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "query",
-          "description" : "Allows to filter the collection of results by the value of field `id`",
-          "schema" : {
-            "type" : "string",
-            "description" : "Allows to filter the collection of results by the value of field `id`"
-          },
-          "example" : "47ee3550-b619-11e6-8408-0bdb025a7cfa"
-        }, {
-          "name" : "name",
-          "in" : "query",
-          "description" : "Allows to filter the collection of results by the value of field `name`",
-          "schema" : {
-            "type" : "string",
-            "description" : "Allows to filter the collection of results by the value of field `name`"
-          },
-          "example" : "Learn about hypermedia APIs"
-        }, {
-          "name" : "$page",
-          "in" : "query",
-          "description" : "Number of the page to retrieve.",
-          "schema" : {
-            "type" : "integer",
-            "description" : "Number of the page to retrieve."
-          },
-          "example" : 1
-        }, {
-          "name" : "$size",
-          "in" : "query",
-          "description" : "Size of the page to retrieve.",
-          "schema" : {
-            "type" : "integer",
-            "description" : "Size of the page to retrieve."
-          },
-          "example" : 10
-        }, {
-          "name" : "$sort",
-          "in" : "query",
-          "description" : "Order in which to retrieve the results. Multiple sort criteria can be passed. Example: sort=age ASC,height DESC",
-          "schema" : {
-            "type" : "string",
-            "description" : "Order in which to retrieve the results. Multiple sort criteria can be passed. Example: sort=age ASC,height DESC"
-          },
-          "example" : "createdAt DESC"
-        }, {
-          "name" : "completed",
-          "in" : "query",
-          "description" : "Allows to filter the collection of results by the value of field `completed`",
-          "schema" : {
-            "type" : "boolean",
-            "description" : "Allows to filter the collection of results by the value of field `completed`"
-          },
-          "example" : true
-        }, {
-          "name" : "createdAt",
-          "in" : "query",
-          "description" : "Allows to filter the collection of results by the value of field `createdAt`",
-          "schema" : {
-            "type" : "string",
-            "description" : "Allows to filter the collection of results by the value of field `createdAt`"
-          },
-          "example" : "2016.07.03"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "headers" : {
-              "X-Page-Size" : {
-                "schema" : {
-                  "type" : "integer"
-                },
-                "example" : 25
-              },
-              "X-Page-Count" : {
-                "schema" : {
-                  "type" : "integer"
-                },
-                "example" : 1
-              },
-              "X-Page-Number" : {
-                "schema" : {
-                  "type" : "integer"
-                },
-                "example" : 1
-              },
-              "X-Total-Count" : {
-                "schema" : {
-                  "type" : "integer"
-                },
-                "example" : 2
-              }
-            },
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Task"
-                  }
-                },
-                "example" : "[{\n  \"id\": \"47ee3550-b619-11e6-8408-0bdb025a7cfa\",\n  \"name\": \"Feed the fish\",\n  \"completed\": false,\n  \"createdAt\": \"2016.07.03\"\n}]"
-              }
-            }
-          },
-          "400" : {
-            "description" : "Status 400",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post" : {
-        "summary" : "Create a new Task",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Task"
-              },
-              "example" : "{\n  \"name\": \"Feed the fish\",\n  \"completed\": false,\n  \"createdAt\": \"2016.07.03\"\n}"
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Task"
-                },
-                "example" : "{\n  \"id\": \"47ee3550-b619-11e6-8408-0bdb025a7cfa\",\n  \"name\": \"Feed the fish\",\n  \"completed\": false,\n  \"createdAt\": \"2016.07.03\"\n}"
-              }
-            }
-          }
-        },
-        "security" : [ {
-          "HTTP_BASIC" : [ ]
-        } ]
-      }
-    },
     "/tasks/{taskid}" : {
-      "get" : {
-        "summary" : "Load a specific Task",
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Task"
-                },
-                "example" : "{\n  \"id\": \"47ee3550-b619-11e6-8408-0bdb025a7cfa\",\n  \"name\": \"Feed the fish\",\n  \"completed\": false,\n  \"createdAt\": \"2016.07.03\"\n}"
-              }
-            }
-          },
-          "400" : {
-            "description" : "Status 400",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+      "description" : "Coucou j'aime les frites",
       "put" : {
         "summary" : "Update a Task",
         "requestBody" : {
@@ -245,35 +67,16 @@
       "Task" : {
         "type" : "object",
         "required" : [ "completed", "id", "name" ],
-        "description" : "An object that represents a Task.",
+        "description" : "An object that represents a task",
         "properties" : {
           "id" : {
             "type" : "string",
             "description" : "Auto-generated primary key field",
             "example" : "3fa2eb40-b61c-11e6-9de0-fdbe71bceebb"
           },
-          "date" : {
-            "type" : "string",
-            "format" : "date"
-          },
-          "file" : {
-            "type" : "string",
-            "format" : "binary"
-          },
           "name" : {
             "type" : "string",
             "example" : "Figure out how to colonize Mars"
-          },
-          "time" : {
-            "type" : "string",
-            "format" : "time"
-          },
-          "number" : {
-            "type" : "number"
-          },
-          "datetime" : {
-            "type" : "string",
-            "format" : "date-time"
           },
           "completed" : {
             "type" : "boolean"
